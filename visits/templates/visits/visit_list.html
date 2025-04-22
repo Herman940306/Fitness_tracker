@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Visit List</h2>
+    <a href="{% url 'visit_create' %}" class="btn btn-primary mb-3">Add New Visit</a>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Visitor</th>
+                <th>Staff</th>
+                <th>Date</th>
+                <th>Purpose</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for visit in visits %}
+            <tr>
+                <td>{{ visit.visitor.name }}</td>
+                <td>{{ visit.staff.name }}</td>
+                <td>{{ visit.visit_date|date:"Y-m-d H:i" }}</td>
+                <td>{{ visit.purpose }}</td>
+                <td>
+                    <a href="{% url 'visit_update' visit.id %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'visit_delete' visit.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No visits found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Staff</h2>
+<a href="{% url 'staff_create' %}" class="btn btn-primary mb-3">Add Staff</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Date of Birth</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for staff in staff_members %}
+        <tr>
+            <td>{{ staff.name }}</td>
+            <td>{{ staff.address }}</td>
+            <td>{{ staff.date_of_birth }}</td>
+            <td>{{ staff.role }}</td>
+            <td>{{ staff.email }}</td>
+            <td>
+                <a href="{% url 'staff_update' staff.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{% url 'staff_delete' staff.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

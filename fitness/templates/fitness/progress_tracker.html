@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Progress Tracker</h2>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Exercise Progress</h5>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Exercise</th>
+                            <th>Completed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for exercise in exercises %}
+                        <tr>
+                            <td>{{ exercise.name }}</td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" 
+                                           id="exercise-{{ exercise.id }}">
+                                    <label class="form-check-label" for="exercise-{{ exercise.id }}">
+                                        Done
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Goal Progress</h5>
+            </div>
+            <div class="card-body">
+                {% for goal in goals %}
+                <div class="mb-3">
+                    <h6>{{ goal.description }}</h6>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" 
+                             style="width: {{ goal.progress_percentage }}%" 
+                             aria-valuenow="{{ goal.progress_percentage }}" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100">
+                            {{ goal.progress_percentage|floatformat:0 }}%
+                        </div>
+                    </div>
+                    <small>{{ goal.progress }} of {{ goal.target }}</small>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

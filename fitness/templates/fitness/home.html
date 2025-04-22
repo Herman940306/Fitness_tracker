@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for workout in workouts %}
+  {{ workout.name }}
+  <!-- other workout fields -->
+{% endfor %}
+<h1>Welcome to Fitness Tracker</h1>
+{% if user.is_authenticated %}
+    <p>Hello, {{ user.username }}! You are logged in as {{ user.get_role_display }}.</p>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Workout Categories</h5>
+                    <a href="{% url 'category_list' %}" class="btn btn-primary">View</a>
+                </div>
+            </div>
+        </div>
+        <!-- Add more cards for other features -->
+    </div>
+{% else %}
+    <p>Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'register' %}">register</a> to access the system.</p>
+{% endif %}
+{% endblock %}

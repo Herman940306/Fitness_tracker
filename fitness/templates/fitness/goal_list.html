@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Fitness Goals</h2>
+<a href="{% url 'goal_create' %}" class="btn btn-primary mb-3">Set New Goal</a>
+<div class="row">
+    {% for goal in goals %}
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ goal.description }}</h5>
+                <div class="progress mb-3">
+                    <div class="progress-bar" role="progressbar" 
+                         style="width: {{ goal.progress_percentage }}%" 
+                         aria-valuenow="{{ goal.progress_percentage }}" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100">
+                        {{ goal.progress_percentage|floatformat:0 }}%
+                    </div>
+                </div>
+                <p class="card-text">
+                    Progress: {{ goal.progress }} / {{ goal.target }}
+                </p>
+                <a href="{% url 'goal_update' goal.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{% url 'goal_delete' goal.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

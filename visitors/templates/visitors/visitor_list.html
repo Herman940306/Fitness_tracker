@@ -1,0 +1,33 @@
+<!-- visitors/templates/visitors/visitor_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Visitor List</h1>
+  
+  {% if visitors %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Date Added</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for visitor in visitors %}
+        <tr>
+          <td>{{ visitor.name }}</td>
+          <td>{{ visitor.email }}</td>
+          <td>{{ visitor.created_at|date:"Y-m-d H:i" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="alert alert-info">No visitors found.</div>
+  {% endif %}
+  
+  <a href="{% url 'visitor_create' %}" class="btn btn-primary">
+    Add New Visitor
+  </a>
+{% endblock %}

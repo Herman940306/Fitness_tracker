@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Exercises</h2>
+<a href="{% url 'exercise_create' %}" class="btn btn-primary mb-3">Add Exercise</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Muscle Group</th>
+            <th>Reps</th>
+            <th>Sets</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for exercise in exercises %}
+        <tr>
+            <td>{{ exercise.name }}</td>
+            <td>{{ exercise.category.name }}</td>
+            <td>{{ exercise.muscle_group }}</td>
+            <td>{{ exercise.reps }}</td>
+            <td>{{ exercise.sets }}</td>
+            <td>
+                <a href="{% url 'exercise_update' exercise.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{% url 'exercise_delete' exercise.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
