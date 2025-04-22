@@ -17,14 +17,14 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from visitors.views import VisitorListView, visitor_create
+from members.views import MemberListView, member_create
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('', include('fitness.urls')),
-    path('visitors/', VisitorListView.as_view(), name='visitor_list'),
-    path('visitors/new/', visitor_create, name='visitor_create'),
+    path('members/', MemberListView.as_view(), name='member_list'),
+    path('members/new/', member_create, name='member_create'),
     path('staff/', include('staff.urls')),
     path('visits/', include('visits.urls'))
 ]
